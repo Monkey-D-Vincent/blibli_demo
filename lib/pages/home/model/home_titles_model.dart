@@ -5,14 +5,14 @@ part 'home_titles_model.g.dart';
 
 @JsonSerializable(converters: [SafeStringConverter()])
 class HomeTitlesModel {
-  final String id;
-  final String name;
-  final String description;
-  final String bgPicture;
-  final String bgColor;
-  final String headerImage;
-  final String defaultAuthorId;
-  final String tagId;
+  final String? id;
+  final String? name;
+  final String? description;
+  final String? bgPicture;
+  final String? bgColor;
+  final String? headerImage;
+  final String? defaultAuthorId;
+  final String? tagId;
 
   HomeTitlesModel({
     this.id = "",

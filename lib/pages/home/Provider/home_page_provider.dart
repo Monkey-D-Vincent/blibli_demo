@@ -17,8 +17,19 @@ class HomePageProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      // 添加热门数据
       tabs = await HomeRepository.getHomeCategoryList();
+      final hotItem = HomeTitlesModel(
+        id: "0",
+        name: "热门",
+        description: "",
+        bgPicture: "",
+      );
+
+      tabs.insert(0, hotItem);
+      // 类型
       titles = tabs.map((item) => item.name ?? "").toList();
+      // 页数
       List<Widget> tempPages = [];
       for (int i = 0; i < tabs.length; i++) {
         if (i == 0) {

@@ -46,18 +46,3 @@ class _HomePageContent extends StatelessWidget {
     );
   }
 }
-
-// CarouselSlider(
-// items: List.generate(4, (int index) {
-// return Image.network("", fit: BoxFit.cover, width: width);
-// options: CarouselOptions(
-// // 轮播图高度
-// height: 300,
-// // 轮播图中的内容占用屏幕的占比
-// viewportFraction: 1,
-// // 自动播放
-// autoPlay: true,
-// // 播放间隔
-// autoPlayInterval: Duration(seconds: 3),
-// ),
-// )

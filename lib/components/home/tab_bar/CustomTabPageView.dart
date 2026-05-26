@@ -36,7 +36,7 @@ class _CustomTabPageViewState extends State<CustomTabPageView>
     _pageController = PageController();
   }
 
-  /// 有分类刷新的情况下需要添加
+  // 有分类刷新的情况下需要添加
   @override
   void didUpdateWidget(covariant CustomTabPageView oldWidget) {
     super.didUpdateWidget(oldWidget);

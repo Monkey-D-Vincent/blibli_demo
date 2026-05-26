@@ -37,7 +37,12 @@ class RequestConfig {
       finalPath = finalPath.replaceAll('{$key}', value.toString());
     });
 
-    final uri = Uri.parse(baseUrl + finalPath);
+    Uri uri;
+    if (finalPath.startsWith(baseUrl)) {
+      uri = Uri.parse(finalPath);
+    } else {
+      uri = Uri.parse(baseUrl + finalPath);
+    }
 
     final newUri = uri.replace(queryParameters: queryParameters);
 
