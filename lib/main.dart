@@ -1,4 +1,4 @@
-import 'package:blibli_demo/main/navigator_main.dart';
+import 'package:blibli_demo/component/navigator_main.dart';
 import 'package:flutter/material.dart';
 
 void main() {

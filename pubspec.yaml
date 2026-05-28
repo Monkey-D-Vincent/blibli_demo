@@ -33,13 +33,41 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-  dio: ^5.9.2
-  get: ^4.7.3
-  provider: ^6.1.5+1
-  carousel_slider: ^5.1.2
-  json_annotation: ^4.9.0
-  cached_network_image: ^3.3.1
+
+#  cupertino_icons: ^1.0.8
+#  dio: ^5.9.2
+#  provider: ^6.1.5+1
+#  carousel_slider: ^5.1.2
+#  json_annotation: ^4.9.0
+#  cached_network_image: ^3.3.1
+#  easy_refresh: ^3.5.0
+
+
+
+#  moudle
+#  如果有多个APP，需要加上这个模块来进行拆分，否则不需要
+#  feature_main:
+#    path: ./feature_main
+  feature_home:
+    path: ./feature_home
+  feature_rank:
+    path: ./feature_rank
+  feature_collect:
+    path: ./feature_collect
+  feature_personal:
+    path: ./feature_personal
+# 基础工程
+  common:
+    path: ./common
+# 网络请求
+  lib_network:
+    path: ./lib_network
+# 共享数据
+  lib_shared:
+    path: ./lib_shared
+# 视频播放
+  lib_video:
+    path: ./lib_video
 
 dev_dependencies:
   flutter_test:
