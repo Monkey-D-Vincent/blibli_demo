@@ -4,6 +4,8 @@ import 'package:feature_home/src/components/main/model/home_recommend_model.dart
 import 'package:feature_home/src/components/main/model/video_category_model.dart';
 import 'package:feature_home/src/components/main/repository/home_recommend_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
+import 'package:lib_shared/lib_shared.dart';
 
 class HomeRecommendProvider extends ChangeNotifier {
   bool isLoading = false;
@@ -14,6 +16,8 @@ class HomeRecommendProvider extends ChangeNotifier {
   List<DataItemList> banner = [];
   List<VideoCategoryModel> videoCategories = [];
   List<String> images = [];
+
+  final _userStore = GetIt.instance<BannerStore>();
 
   Future<bool> getHomeData(bool isRefresh) async {
     if (isLoading) {
@@ -58,6 +62,8 @@ class HomeRecommendProvider extends ChangeNotifier {
         }
       }
       images = _getAnimeImages(banner.length);
+      // 轮播图数据
+      _userStore.bannerData = BannerData(images: images);
       print('${videoCategories.length}, ${banner.length}');
       isLoading = false;
       error = false;

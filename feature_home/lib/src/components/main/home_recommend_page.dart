@@ -6,6 +6,7 @@ import 'package:feature_home/src/components/main/model/video_category_model.dart
 import 'package:feature_home/src/components/main/provider/home_recommend_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ui_components/ui_components.dart';
 
 class HomeRecommendPage extends StatefulWidget {
   const HomeRecommendPage({super.key});
@@ -62,7 +63,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
         return IndicatorResult.success;
       },
       onLoad: () async {
-        if(provider.isLoading) {
+        if (provider.isLoading) {
           return IndicatorResult.none;
         }
         bool isMore = await _provider.getHomeData(false);
@@ -73,7 +74,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _bannerWidget(context, provider),
+              BannerState(),
               ...provider.videoCategories.map((item) {
                 return _videosList(context, provider, item);
               }),
@@ -154,47 +155,6 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
     );
   }
 
-  Widget _bannerWidget(BuildContext context, HomeRecommendProvider provider) {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
-
-    return CarouselSlider(
-      key: ValueKey(provider.images.length),
-      items: List.generate(provider.banner.length, (int index) {
-        return Material(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.transparent,
-          clipBehavior: Clip.hardEdge,
-          child: InkWell(
-            onTap: () {
-              ToastUtil.showToast(context, "${index + 1}");
-            },
-            child: CachedNetworkImage(
-              imageUrl: provider.images[index],
-              imageBuilder: (context, imageProvider) {
-                return Image(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                  width: width,
-                );
-              },
-              placeholder: (context, url) => const SizedBox.shrink(),
-              errorWidget: (context, url, error) =>
-                  Image.asset('assets/images/image_error_default.png'),
-            ),
-          ),
-        );
-      }),
-      options: CarouselOptions(
-        height: 200,
-        viewportFraction: 1,
-        autoPlay: true,
-        autoPlayInterval: Duration(seconds: 3),
-      ),
-    );
-  }
 
   @override
   void dispose() {

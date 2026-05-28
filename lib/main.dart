@@ -1,7 +1,9 @@
 import 'package:blibli_demo/component/navigator_main.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_shared/lib_shared.dart';
 
 void main() {
+  setupShared();
   runApp(const MyApp());
 }
 
