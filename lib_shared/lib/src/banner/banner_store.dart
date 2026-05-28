@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lib_shared/src/banner/banner_data.dart';
 
+/// get 解决接收端判空
+/// set 解决赋值端出现问题
 class BannerStore with ChangeNotifier {
-  BannerData? bannerData;
+  BannerData? _bannerData;
+  bool get hasData => _bannerData != null;
+  BannerData get bannerData => _bannerData!;
 
-  void notify() => notifyListeners();
-
-  void clear() {
-    bannerData = null;
+  set bannerData(BannerData? data) {
+    _bannerData = data;
     notifyListeners();
   }
 }

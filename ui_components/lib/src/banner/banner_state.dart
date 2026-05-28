@@ -13,7 +13,6 @@ class BannerState extends StatefulWidget {
 }
 
 class _BannerStateState extends State<BannerState> {
-  List<String> images = [];
   final _userStore = GetIt.instance<BannerStore>();
 
   @override
@@ -24,8 +23,8 @@ class _BannerStateState extends State<BannerState> {
       listenable: _userStore,
       builder: (context, _) {
         return CarouselSlider(
-          key: ValueKey(images.length),
-          items: List.generate(images.length, (int index) {
+          key: ValueKey(_userStore.bannerData.images.length),
+          items: List.generate(_userStore.bannerData.images.length, (int index) {
             return Material(
               borderRadius: BorderRadius.circular(15),
               color: Colors.transparent,
@@ -35,7 +34,7 @@ class _BannerStateState extends State<BannerState> {
                   ToastUtil.showToast(context, "${index + 1}");
                 },
                 child: CachedNetworkImage(
-                  imageUrl: images[index],
+                  imageUrl: _userStore.bannerData.images[index],
                   imageBuilder: (context, imageProvider) {
                     return Image(
                       image: imageProvider,
