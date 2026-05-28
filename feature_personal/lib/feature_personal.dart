@@ -1,0 +1,1 @@
+export 'src/pages/main/personal_page.dart';

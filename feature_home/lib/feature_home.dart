@@ -1,0 +1,1 @@
+export 'src/pages/main/home_page.dart';
