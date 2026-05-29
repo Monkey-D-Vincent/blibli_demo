@@ -1,6 +1,6 @@
 import 'package:common/common.dart';
-import 'package:feature_home/src/components/main/model/home_recommend_model.dart';
 import 'package:lib_network/lib_network.dart';
+import 'package:lib_shared/lib_shared.dart';
 
 class HomeRecommendRepository {
   static Future<HomeRecommendModel> getRecommendData({

@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:feature_home/src/components/main/model/home_recommend_model.dart';
-import 'package:feature_home/src/components/main/model/video_category_model.dart';
 import 'package:feature_home/src/components/main/repository/home_recommend_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
@@ -14,10 +12,10 @@ class HomeRecommendProvider extends ChangeNotifier {
   late HomeRecommendModel model;
   String nextPageUrl = "";
   List<DataItemList> banner = [];
-  List<VideoCategoryModel> videoCategories = [];
+  List<VideoItemData> videoCategories = [];
   List<String> images = [];
 
-  final _userStore = GetIt.instance<BannerStore>();
+  final _bannerStore = GetIt.instance<BannerStore>();
 
   Future<bool> getHomeData(bool isRefresh) async {
     if (isLoading) {
@@ -48,7 +46,7 @@ class HomeRecommendProvider extends ChangeNotifier {
         } else if ("textHeader" == item.type) {
           // 标题
           if (item.data is PurpleData) {
-            VideoCategoryModel videoCategory = VideoCategoryModel(
+            VideoItemData videoCategory = VideoItemData(
               title: item.data?.text ?? "",
               videos: [],
             );
@@ -63,7 +61,7 @@ class HomeRecommendProvider extends ChangeNotifier {
       }
       images = _getAnimeImages(banner.length);
       // 轮播图数据
-      _userStore.bannerData = BannerData(images: images);
+      _bannerStore.bannerData = BannerData(images: images);
       print('${videoCategories.length}, ${banner.length}');
       isLoading = false;
       error = false;
@@ -120,34 +118,5 @@ class HomeRecommendProvider extends ChangeNotifier {
     }
 
     return result;
-  }
-
-  final List<String> _animeImagePool = [
-    "https://acg.yaohud.cn/dm/adaptive.php?img=1",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=2",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=3",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=4",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=5",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=6",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=7",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=8",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=9",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=10",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=11",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=12",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=13",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=14",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=15",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=16",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=17",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=18",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=19",
-    "https://acg.yaohud.cn/dm/adaptive.php?img=20",
-  ];
-
-  String getRandomAnimeImage() {
-    final Random random = Random();
-    int index = random.nextInt(_animeImagePool.length - 1);
-    return _animeImagePool[index];
   }
 }

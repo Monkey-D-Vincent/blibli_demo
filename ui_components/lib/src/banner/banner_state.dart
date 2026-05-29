@@ -13,18 +13,18 @@ class BannerState extends StatefulWidget {
 }
 
 class _BannerStateState extends State<BannerState> {
-  final _userStore = GetIt.instance<BannerStore>();
+  final _bannerStore = GetIt.instance<BannerStore>();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
     return ListenableBuilder(
-      listenable: _userStore,
+      listenable: _bannerStore,
       builder: (context, _) {
         return CarouselSlider(
-          key: ValueKey(_userStore.bannerData.images.length),
-          items: List.generate(_userStore.bannerData.images.length, (int index) {
+          key: ValueKey(_bannerStore.bannerData.images.length),
+          items: List.generate(_bannerStore.bannerData.images.length, (int index) {
             return Material(
               borderRadius: BorderRadius.circular(15),
               color: Colors.transparent,
@@ -34,7 +34,7 @@ class _BannerStateState extends State<BannerState> {
                   ToastUtil.showToast(context, "${index + 1}");
                 },
                 child: CachedNetworkImage(
-                  imageUrl: _userStore.bannerData.images[index],
+                  imageUrl: _bannerStore.bannerData.images[index],
                   imageBuilder: (context, imageProvider) {
                     return Image(
                       image: imageProvider,

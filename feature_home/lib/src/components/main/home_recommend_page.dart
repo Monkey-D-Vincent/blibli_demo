@@ -1,9 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:common/common.dart';
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:feature_home/src/components/main/model/video_category_model.dart';
 import 'package:feature_home/src/components/main/provider/home_recommend_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_components/ui_components.dart';
 
@@ -38,11 +37,11 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
 
   Widget _buildBody(BuildContext context, HomeRecommendProvider provider) {
     if (provider.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Center(child: CircularProgressIndicator());
     }
 
     if (provider.error) {
-      return const Scaffold(body: Center(child: Text("加载失败")));
+      return const Center(child: Text("加载失败"));
     }
 
     return EasyRefresh(
@@ -69,9 +68,11 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
         padding: const EdgeInsets.all(10),
         child: CustomScrollView(
           slivers: [
+            // banner
             SliverToBoxAdapter(child: BannerState()),
+            // 列表
             ...provider.videoCategories.map((item) {
-              return _videoItems(context, provider, item);
+              return _videoItems(context, item);
             }),
           ],
         ),
@@ -79,11 +80,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
     );
   }
 
-  Widget _videoItems(
-    BuildContext context,
-    HomeRecommendProvider provider,
-    VideoCategoryModel item,
-  ) {
+  Widget _videoItems(BuildContext context, VideoItemData item) {
     return SliverPadding(
       padding: const EdgeInsets.only(top: 15),
       sliver: DecoratedSliver(
@@ -123,28 +120,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
                     onTap: () {
                       ToastUtil.showToast(context, "$position");
                     },
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          child: CachedNetworkImage(
-                            imageUrl: provider.getRandomAnimeImage(),
-                            imageBuilder: (context, imageProvider) {
-                              return Image(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: 150,
-                              );
-                            },
-                            placeholder: (context, url) =>
-                                const SizedBox.shrink(),
-                            errorWidget: (context, url, error) => Image.asset(
-                              'assets/images/image_error_default.png',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: VideoItemState(item: item),
                   );
                 },
               ),
