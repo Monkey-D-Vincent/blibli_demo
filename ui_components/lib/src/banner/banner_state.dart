@@ -53,7 +53,7 @@ class _BannerStateState extends State<BannerState> {
             height: 200,
             viewportFraction: 1,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
+            autoPlayInterval: const Duration(seconds: 3),
           ),
         );
       },

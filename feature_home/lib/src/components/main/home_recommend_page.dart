@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:common/common.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:feature_home/src/components/main/model/video_category_model.dart';
@@ -54,10 +53,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
         processingText: '刷新中...',
         processedText: '刷新完成',
       ),
-      footer: ClassicFooter(
-        dragText: '上拉加载',
-        readyText: '加载中...',
-      ),
+      footer: ClassicFooter(dragText: '上拉加载', readyText: '加载中...'),
       onRefresh: () async {
         _provider.getHomeData(true);
         return IndicatorResult.success;
@@ -70,91 +66,94 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
         return isMore ? IndicatorResult.noMore : IndicatorResult.success;
       },
       child: Padding(
-        padding: EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              BannerState(),
-              ...provider.videoCategories.map((item) {
-                return _videosList(context, provider, item);
-              }),
+        padding: const EdgeInsets.all(10),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: BannerState()),
+            ...provider.videoCategories.map((item) {
+              return _videoItems(context, provider, item);
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _videoItems(
+    BuildContext context,
+    HomeRecommendProvider provider,
+    VideoCategoryModel item,
+  ) {
+    return SliverPadding(
+      padding: const EdgeInsets.only(top: 15),
+      sliver: DecoratedSliver(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        sliver: SliverPadding(
+          padding: const EdgeInsets.all(10),
+          sliver: SliverMainAxisGroup(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  color: Colors.white,
+                  child: Text(
+                    item.title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color(0xFF333333),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+              SliverGrid.builder(
+                itemCount: item.videos.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 1.25, // item 比例   宽/高
+                ),
+                itemBuilder: (context, position) {
+                  return InkWell(
+                    onTap: () {
+                      ToastUtil.showToast(context, "$position");
+                    },
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: CachedNetworkImage(
+                            imageUrl: provider.getRandomAnimeImage(),
+                            imageBuilder: (context, imageProvider) {
+                              return Image(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: 150,
+                              );
+                            },
+                            placeholder: (context, url) =>
+                                const SizedBox.shrink(),
+                            errorWidget: (context, url, error) => Image.asset(
+                              'assets/images/image_error_default.png',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
-  Widget _videosList(BuildContext context,
-      HomeRecommendProvider provider,
-      VideoCategoryModel item,) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: const EdgeInsets.only(top: 15),
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            width: double.infinity,
-            color: Colors.white,
-            child: Text(
-              item.title,
-              style: TextStyle(
-                fontSize: 16,
-                color: const Color(0xFF333333),
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: item.videos.length,
-            padding: EdgeInsets.only(bottom: 10),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 1.25, // item 比例   宽/高
-            ),
-            itemBuilder: (context, position) {
-              return InkWell(
-                onTap: () {
-                  ToastUtil.showToast(context, "$position");
-                },
-                child: Stack(
-                  children: [
-                    Positioned(
-                      child: CachedNetworkImage(
-                        imageUrl: provider.getRandomAnimeImage(),
-                        imageBuilder: (context, imageProvider) {
-                          return Image(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: 150,
-                          );
-                        },
-                        placeholder: (context, url) => const SizedBox.shrink(),
-                        errorWidget: (context, url, error) =>
-                            Image.asset(
-                                'assets/images/image_error_default.png'),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
 
   @override
   void dispose() {
