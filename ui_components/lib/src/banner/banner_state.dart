@@ -15,6 +15,15 @@ class BannerState extends StatefulWidget {
 class _BannerStateState extends State<BannerState> {
   final _bannerStore = GetIt.instance<BannerStore>();
 
+  int _currentIndex = 0;
+  late CarouselSliderController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = CarouselSliderController();
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -22,41 +31,93 @@ class _BannerStateState extends State<BannerState> {
     return ListenableBuilder(
       listenable: _bannerStore,
       builder: (context, _) {
-        return CarouselSlider(
-          key: ValueKey(_bannerStore.bannerData.images.length),
-          items: List.generate(_bannerStore.bannerData.images.length, (int index) {
-            return Material(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.transparent,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                onTap: () {
-                  ToastUtil.showToast(context, "${index + 1}");
-                },
-                child: CachedNetworkImage(
-                  imageUrl: _bannerStore.bannerData.images[index],
-                  imageBuilder: (context, imageProvider) {
-                    return Image(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                      width: width,
-                    );
+        return Stack(
+          children: [
+            Positioned(
+              child: CarouselSlider(
+                carouselController: _controller,
+                key: ValueKey(_bannerStore.bannerData.images.length),
+                items: List.generate(_bannerStore.bannerData.images.length, (
+                  int index,
+                ) {
+                  return Material(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.transparent,
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      onTap: () {
+                        ToastUtil.showToast(context, "${index + 1}");
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: _bannerStore.bannerData.images[index],
+                        imageBuilder: (context, imageProvider) {
+                          return Image(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                            width: width,
+                          );
+                        },
+                        placeholder: (context, url) => const SizedBox.shrink(),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/images/image_error_default.png',
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+                options: CarouselOptions(
+                  height: 200,
+                  viewportFraction: 1,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  onPageChanged: (int index, reason) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
                   },
-                  placeholder: (context, url) => const SizedBox.shrink(),
-                  errorWidget: (context, url, error) =>
-                      Image.asset('assets/images/image_error_default.png'),
+                ),
+              ),
+            ),
+            _getPosition(),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _getPosition() {
+    return Positioned(
+      left: 0,
+      right: 0,
+      bottom: 0,
+      child: SizedBox(
+        height: 20,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(_bannerStore.bannerData.images.length, (
+            int index,
+          ) {
+            return GestureDetector(
+              onTap: () {
+                _controller.jumpToPage(_currentIndex);
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: EdgeInsets.symmetric(horizontal: 3),
+                width: index == _currentIndex ? 20 : 8,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: index == _currentIndex
+                      ? Colors.white
+                      : Colors.white.withAlpha(110),
+                  borderRadius: BorderRadius.circular(4),
                 ),
               ),
             );
           }),
-          options: CarouselOptions(
-            height: 200,
-            viewportFraction: 1,
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 3),
-          ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

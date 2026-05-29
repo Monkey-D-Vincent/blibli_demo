@@ -120,7 +120,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
                     onTap: () {
                       ToastUtil.showToast(context, "$position");
                     },
-                    child: VideoItemState(item: item),
+                    child: VideoItemState(item: item.videos[position]),
                   );
                 },
               ),
