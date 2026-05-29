@@ -13,7 +13,7 @@ class HomeRecommendPage extends StatefulWidget {
   State<HomeRecommendPage> createState() => _HomeRecommendPageState();
 }
 
-class _HomeRecommendPageState extends State<HomeRecommendPage> {
+class _HomeRecommendPageState extends State<HomeRecommendPage> with AutomaticKeepAliveClientMixin {
   late HomeRecommendProvider _provider;
 
   @override
@@ -136,4 +136,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> {
     _provider.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

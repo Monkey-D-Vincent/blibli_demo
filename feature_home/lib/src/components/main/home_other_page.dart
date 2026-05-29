@@ -10,11 +10,14 @@ class HomeOtherPage extends StatefulWidget {
   State<HomeOtherPage> createState() => _HomeOtherPageState();
 }
 
-class _HomeOtherPageState extends State<HomeOtherPage> {
+class _HomeOtherPageState extends State<HomeOtherPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text("其他啊"),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
