@@ -1,3 +1,4 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:feature_home/src/components/main/popular/popular_banner_widget.dart';
 import 'package:feature_home/src/components/main/popular/popular_list_widget.dart';
 import 'package:feature_home/src/components/main/provider/home_popular_provider.dart';
@@ -21,19 +22,44 @@ class PopularBodyWidget extends StatelessWidget {
           },
         ),
         Positioned.fill(
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(10),
-            child: CustomScrollView(
-              slivers: [
-                // banner
-                PopularBannerWidget(),
-                // 列表
-                PopularListWidget(),
-              ],
-            ),
+            child: _pageWidget(context),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _pageWidget(BuildContext context) {
+    return EasyRefresh(
+      header: ClassicHeader(
+        dragText: '下拉刷新',
+        armedText: '释放刷新',
+        readyText: '正在刷新...',
+        processingText: '刷新中...',
+        processedText: '刷新完成',
+      ),
+      footer: ClassicFooter(dragText: '上拉加载', readyText: '加载中...'),
+      onRefresh: () async {
+        await context.read<HomePopularProvider>().getData(true);
+        return IndicatorResult.success;
+      },
+      onLoad: () async {
+        if (context.read<HomePopularProvider>().isLoading) {
+          return IndicatorResult.none;
+        }
+        bool isMore = await context.read<HomePopularProvider>().getData(false);
+        return isMore ? IndicatorResult.noMore : IndicatorResult.success;
+      },
+      child: CustomScrollView(
+        slivers: [
+          // banner
+          PopularBannerWidget(),
+          // 列表
+          PopularListWidget(),
+        ],
+      ),
     );
   }
 }

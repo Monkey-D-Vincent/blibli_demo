@@ -10,12 +10,17 @@ class HomePopularPage extends StatefulWidget {
   State<HomePopularPage> createState() => _HomePopularPageState();
 }
 
-class _HomePopularPageState extends State<HomePopularPage> {
+class _HomePopularPageState extends State<HomePopularPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ChangeNotifierProvider(
-      create: (_) => HomePopularProvider()..getData(),
+      create: (_) => HomePopularProvider()..getData(true),
       child: const PopularBodyWidget(),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
