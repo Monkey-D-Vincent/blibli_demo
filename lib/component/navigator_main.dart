@@ -41,7 +41,7 @@ class _MainTabNavigatorState extends State<MainTabNavigator> {
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "首页"),
-          BottomNavigationBarItem(icon: Icon(Icons.trending_up), label: "排行"),
+          BottomNavigationBarItem(icon: Icon(Icons.explore), label: "社区"),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "收藏"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "我的"),
         ],
