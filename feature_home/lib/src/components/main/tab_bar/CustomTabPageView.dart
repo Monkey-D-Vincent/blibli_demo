@@ -87,6 +87,7 @@ class _CustomTabPageViewState extends State<CustomTabPageView>
                   labelColor: widget.selectColor,
                   unselectedLabelColor: widget.unSelectColor,
                   indicatorColor: widget.indicatorColorColor,
+                  dividerColor: Colors.transparent,
                   tabs: widget.titles.map((text) => Tab(text: text)).toList(),
                   onTap: (index) {
                     _pageController.animateToPage(

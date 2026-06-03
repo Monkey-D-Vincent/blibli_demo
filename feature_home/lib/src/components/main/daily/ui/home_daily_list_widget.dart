@@ -152,7 +152,7 @@ class HomeDailyListWidget extends StatelessWidget {
       ClipRRect(
         borderRadius: BorderRadius.circular(15),
         child: CachedNetworkImage(
-          imageUrl: item.cover?.detail ?? "",
+          imageUrl: item.author?.icon ?? "",
           imageBuilder: (_, imageProvider) {
             return Image(
               image: imageProvider,

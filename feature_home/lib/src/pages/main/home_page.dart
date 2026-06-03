@@ -22,18 +22,6 @@ class _HomePageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<HomePageProvider>();
 
-    if (provider.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
-
-    if (provider.error) {
-      return const Scaffold(body: Center(child: Text("加载失败")));
-    }
-
-    if (provider.titles.isEmpty) {
-      return const Scaffold(body: Center(child: Text("暂无数据")));
-    }
-
     return Scaffold(
       body: CustomTabPageView(
         titles: provider.titles,
