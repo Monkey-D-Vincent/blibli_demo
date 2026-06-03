@@ -1,5 +1,5 @@
 import 'package:feature_rank/src/components/recommend/community_recommend_list_widget.dart';
-import 'package:feature_rank/src/pages/attention/provider/community_attention_provider.dart';
+import 'package:feature_rank/src/pages/recommend/provider/community_attention_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_components/ui_components.dart';

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'community_attention_model.dart';
+part of '../../attention/model/community_attention_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

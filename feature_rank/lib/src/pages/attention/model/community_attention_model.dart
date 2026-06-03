@@ -5,7 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
-part 'community_attention_model.g.dart';
+part '../../recommend/model/community_attention_model.g.dart';
 
 @JsonSerializable()
 class CommunityAttentionModel {

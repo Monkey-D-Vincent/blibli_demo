@@ -1,5 +1,5 @@
 import 'package:feature_rank/src/pages/attention/model/community_attention_model.dart';
-import 'package:feature_rank/src/pages/attention/repository/community_attention_repository.dart';
+import 'package:feature_rank/src/pages/recommend/repository/community_attention_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class CommunityAttentionProvider extends ChangeNotifier {

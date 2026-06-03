@@ -1,8 +1,6 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feature_rank/src/pages/attention/model/community_attention_model.dart';
-import 'package:feature_rank/src/pages/attention/provider/community_attention_provider.dart';
+import 'package:feature_rank/src/pages/recommend/provider/community_attention_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
