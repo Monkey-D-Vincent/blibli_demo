@@ -14,7 +14,8 @@ class CommunityRecommendListWidget extends StatefulWidget {
 }
 
 class _CommunityRecommendListWidgetState
-    extends State<CommunityRecommendListWidget> with AutomaticKeepAliveClientMixin  {
+    extends State<CommunityRecommendListWidget>
+    with AutomaticKeepAliveClientMixin {
   late ScrollController _scrollController;
 
   @override
@@ -54,10 +55,10 @@ class _CommunityRecommendListWidgetState
     return Material(
       color: Colors.white,
       borderRadius: BorderRadius.circular(10),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: InkWell(
-          onTap: () {},
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

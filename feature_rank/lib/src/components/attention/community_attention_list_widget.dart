@@ -30,10 +30,10 @@ class CommunityAttentionListWidget extends StatelessWidget {
       child: Material(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: InkWell(
-            onTap: () {},
+        child: InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 Row(
@@ -53,7 +53,7 @@ class CommunityAttentionListWidget extends StatelessWidget {
                         placeholder: (context, url) => const SizedBox.shrink(),
                       ),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
