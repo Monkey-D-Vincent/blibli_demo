@@ -1,5 +1,5 @@
 import 'package:feature_rank/src/components/recommend/community_recommend_widget.dart';
-import 'package:feature_rank/src/pages/recommend/provider/community_attention_provider.dart';
+import 'package:feature_rank/src/pages/recommend/provider/community_recommend_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class _CommunityRecommendStateState extends State<CommunityRecommendState>
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (_) => CommunityAttentionProvider()..getData(true),
+      create: (_) => CommunityRecommendProvider()..getData(true),
       child: CommunityRecommendWidget(),
     );
   }

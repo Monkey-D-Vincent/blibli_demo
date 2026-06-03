@@ -1,4 +1,4 @@
-import 'package:feature_rank/src/pages/attention/community_attention_state.dart';
+import 'package:feature_rank/src/pages/attention/ui/community_attention_state.dart';
 import 'package:feature_rank/src/pages/recommend/ui/community_recommend_state.dart';
 import 'package:flutter/material.dart';
 

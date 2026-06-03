@@ -1,8 +1,8 @@
-import 'package:feature_rank/src/pages/attention/model/community_attention_model.dart';
-import 'package:feature_rank/src/pages/recommend/repository/community_attention_repository.dart';
+import 'package:feature_rank/src/pages/recommend/model/community_recommend_model.dart';
+import 'package:feature_rank/src/pages/recommend/repository/community_recommend_repository.dart';
 import 'package:flutter/cupertino.dart';
 
-class CommunityAttentionProvider extends ChangeNotifier {
+class CommunityRecommendProvider extends ChangeNotifier {
   bool isLoading = false;
   bool error = false;
   String nextPageUrl = "";
@@ -17,9 +17,9 @@ class CommunityAttentionProvider extends ChangeNotifier {
     }
 
     try {
-      final CommunityAttentionModel data =
-          await CommunityAttentionRepository.getData(pageNextUrl: nextPageUrl);
-      List<CommunityAttentionModelItemList> itemList = data.itemList ?? [];
+      final CommunityRecommendModel data =
+          await CommunityRecommendRepository.getData(pageNextUrl: nextPageUrl);
+      List<CommunityRecommendModelItemList> itemList = data.itemList ?? [];
       for (var item in itemList) {
         if (item.type == "communityColumnsCard") {
           final rawData = item.data?.content?.data;

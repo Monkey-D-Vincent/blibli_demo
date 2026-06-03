@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../attention/model/community_attention_model.dart';
+part of 'community_recommend_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CommunityAttentionModel _$CommunityAttentionModelFromJson(
+CommunityRecommendModel _$CommunityRecommendModelFromJson(
   Map<String, dynamic> json,
-) => CommunityAttentionModel(
+) => CommunityRecommendModel(
   itemList: (json['itemList'] as List<dynamic>?)
       ?.map(
         (e) =>
-            CommunityAttentionModelItemList.fromJson(e as Map<String, dynamic>),
+            CommunityRecommendModelItemList.fromJson(e as Map<String, dynamic>),
       )
       .toList(),
   count: (json['count'] as num?)?.toInt(),
@@ -21,8 +21,8 @@ CommunityAttentionModel _$CommunityAttentionModelFromJson(
   adExist: json['adExist'] as bool?,
 );
 
-Map<String, dynamic> _$CommunityAttentionModelToJson(
-  CommunityAttentionModel instance,
+Map<String, dynamic> _$CommunityRecommendModelToJson(
+  CommunityRecommendModel instance,
 ) => <String, dynamic>{
   'itemList': instance.itemList,
   'count': instance.count,
@@ -31,9 +31,9 @@ Map<String, dynamic> _$CommunityAttentionModelToJson(
   'adExist': instance.adExist,
 };
 
-CommunityAttentionModelItemList _$CommunityAttentionModelItemListFromJson(
+CommunityRecommendModelItemList _$CommunityRecommendModelItemListFromJson(
   Map<String, dynamic> json,
-) => CommunityAttentionModelItemList(
+) => CommunityRecommendModelItemList(
   type: json['type'] as String?,
   data: json['data'] == null
       ? null
@@ -44,8 +44,8 @@ CommunityAttentionModelItemList _$CommunityAttentionModelItemListFromJson(
   adIndex: (json['adIndex'] as num?)?.toInt(),
 );
 
-Map<String, dynamic> _$CommunityAttentionModelItemListToJson(
-  CommunityAttentionModelItemList instance,
+Map<String, dynamic> _$CommunityRecommendModelItemListToJson(
+  CommunityRecommendModelItemList instance,
 ) => <String, dynamic>{
   'type': instance.type,
   'data': instance.data,
