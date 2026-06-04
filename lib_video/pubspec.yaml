@@ -12,6 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  video_player: ^2.9.0 # 负责底层播放逻辑
+  chewie: ^1.8.1       # 负责提供交互 UI
+
+  lib_player_adapter:
+    path: ../lib_player_adapter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
