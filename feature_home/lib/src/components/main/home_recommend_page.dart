@@ -13,7 +13,8 @@ class HomeRecommendPage extends StatefulWidget {
   State<HomeRecommendPage> createState() => _HomeRecommendPageState();
 }
 
-class _HomeRecommendPageState extends State<HomeRecommendPage> with AutomaticKeepAliveClientMixin {
+class _HomeRecommendPageState extends State<HomeRecommendPage>
+    with AutomaticKeepAliveClientMixin {
   late HomeRecommendProvider _provider;
 
   @override
@@ -25,6 +26,7 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> with AutomaticKee
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ChangeNotifierProvider.value(
       value: _provider,
       child: Consumer<HomeRecommendProvider>(
@@ -118,7 +120,19 @@ class _HomeRecommendPageState extends State<HomeRecommendPage> with AutomaticKee
                 itemBuilder: (context, position) {
                   return InkWell(
                     onTap: () {
-                      ToastUtil.showToast(context, "$position");
+                      if (item.videos[position].playUrl != null &&
+                          item.videos[position].playUrl!.isNotEmpty) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => VideoDetailPage(
+                              url: item.videos[position].playUrl ?? "",
+                              id: int.parse(item.videos[position].id ?? "-1"),
+                            ),
+                          ),
+                        );
+                      } else {
+                        ToastUtil.showToast(context, "视频链接不合法");
+                      }
                     },
                     child: VideoItemState(item: item.videos[position]),
                   );

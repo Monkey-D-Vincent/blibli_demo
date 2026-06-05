@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:common/common.dart';
 import 'package:feature_home/src/components/main/provider/home_popular_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
+import 'package:ui_components/ui_components.dart';
 
 class PopularListWidget extends StatelessWidget {
   const PopularListWidget({super.key});
@@ -57,7 +59,21 @@ class PopularListWidget extends StatelessWidget {
                 itemBuilder: (context, position) {
                   return Material(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        if (item.videos[position].playUrl != null &&
+                            item.videos[position].playUrl!.isNotEmpty) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => VideoDetailPage(
+                                url: item.videos[position].playUrl ?? "",
+                                id: int.parse(item.videos[position].id ?? "-1"),
+                              ),
+                            ),
+                          );
+                        } else {
+                          ToastUtil.showToast(context, "视频链接不合法");
+                        }
+                      },
                       child: Ink(
                         decoration: BoxDecoration(
                           color: Colors.white,

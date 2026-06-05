@@ -1,1 +1,1 @@
-export 'src/main/app_video_player.dart';
+export 'src/ui/app_video_player.dart';

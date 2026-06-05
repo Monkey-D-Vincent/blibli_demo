@@ -1,7 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ui_components/src/video/component/video_detail_widget.dart';
+import 'package:ui_components/src/video/provider/video_detail_provider.dart';
 
 class VideoDetailPage extends StatefulWidget {
-  const VideoDetailPage({super.key});
+  final String url;
+  final int id;
+
+  const VideoDetailPage({super.key, required this.url, required this.id});
 
   @override
   State<VideoDetailPage> createState() => _VideoDetailPageState();
@@ -10,6 +16,9 @@ class VideoDetailPage extends StatefulWidget {
 class _VideoDetailPageState extends State<VideoDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ChangeNotifierProvider(
+      create: (_) => VideoDetailProvider()..getData(id: "${widget.id}"),
+      child: VideoDetailWidget(url: widget.url),
+    );
   }
 }

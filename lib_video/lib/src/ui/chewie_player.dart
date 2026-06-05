@@ -13,13 +13,18 @@ class ChewiePlayer implements IVideoPlayer {
 
   @override
   Future<void> init() async {
-    _videoController = VideoPlayerController.networkUrl(Uri.parse(url));
-    await _videoController.initialize();
-    _chewieController = ChewieController(
-      videoPlayerController: _videoController,
-      autoPlay: false,
-      looping: false,
-    );
+    try {
+      _videoController = VideoPlayerController.networkUrl(Uri.parse(url));
+      await _videoController.initialize();
+      _chewieController = ChewieController(
+        videoPlayerController: _videoController,
+        autoPlay: false,
+        looping: false,
+      );
+    } catch (e) {
+      debugPrint('播放器初始化失败: $e');
+      rethrow;
+    }
   }
 
   @override

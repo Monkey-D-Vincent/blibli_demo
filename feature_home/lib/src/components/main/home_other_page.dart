@@ -28,6 +28,7 @@ class _HomeOtherPageState extends State<HomeOtherPage> with AutomaticKeepAliveCl
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ChangeNotifierProvider.value(
       value: _provider,
       child: Consumer<HomeRecommendProvider>(
@@ -119,7 +120,19 @@ class _HomeOtherPageState extends State<HomeOtherPage> with AutomaticKeepAliveCl
                 itemBuilder: (context, position) {
                   return InkWell(
                     onTap: () {
-                      ToastUtil.showToast(context, "$position");
+                      if (item.videos[position].playUrl != null &&
+                          item.videos[position].playUrl!.isNotEmpty) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => VideoDetailPage(
+                              url: item.videos[position].playUrl ?? "",
+                              id: int.parse(item.videos[position].id ?? "-1"),
+                            ),
+                          ),
+                        );
+                      } else {
+                        ToastUtil.showToast(context, "视频链接不合法");
+                      }
                     },
                     child: VideoItemState(item: item.videos[position]),
                   );

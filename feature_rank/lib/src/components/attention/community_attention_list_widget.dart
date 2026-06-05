@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:common/common.dart';
 import 'package:feature_rank/src/pages/attention/model/community_attention_model.dart';
 import 'package:feature_rank/src/pages/attention/provider/community_attention_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:ui_components/ui_components.dart';
 
 class CommunityAttentionListWidget extends StatelessWidget {
   const CommunityAttentionListWidget({super.key});
@@ -31,7 +33,20 @@ class CommunityAttentionListWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            if (item.playUrl != null && item.playUrl!.isNotEmpty) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => VideoDetailPage(
+                    url: item.playUrl ?? "",
+                    id: item.id ?? -1,
+                  ),
+                ),
+              );
+            } else {
+              ToastUtil.showToast(context, "视频链接不合法");
+            }
+          },
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(

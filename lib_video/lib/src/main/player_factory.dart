@@ -1,6 +1,6 @@
 import 'package:lib_player_adapter/lib_player_adapter.dart';
 
-import 'chewie_player.dart';
+import '../ui/chewie_player.dart';
 
 class PlayerFactory {
   static Future<IVideoPlayer> create({

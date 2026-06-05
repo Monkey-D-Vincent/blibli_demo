@@ -30,10 +30,7 @@ class _PopularBannerWidgetState extends State<PopularBannerWidget> {
         selector: (_, p) => p.banner,
         builder: (_, banner, __) {
           return Stack(
-            children: [
-              _bannerWidget(context, banner),
-              _positionWidget(banner),
-            ],
+            children: [_bannerWidget(context, banner), _positionWidget(banner)],
           );
         },
       ),
@@ -47,17 +44,13 @@ class _PopularBannerWidgetState extends State<PopularBannerWidget> {
       child: CarouselSlider(
         carouselController: _controller,
         key: ValueKey(banner.length),
-        items: List.generate(banner.length, (
-            int index,
-            ) {
+        items: List.generate(banner.length, (int index) {
           return Material(
             borderRadius: BorderRadius.circular(15),
             color: Colors.transparent,
             clipBehavior: Clip.hardEdge,
             child: InkWell(
-              onTap: () {
-                ToastUtil.showToast(context, "${index + 1}");
-              },
+              onTap: () {},
               child: CachedNetworkImage(
                 imageUrl: banner[index].detail ?? "",
                 imageBuilder: (context, imageProvider) {
@@ -67,8 +60,7 @@ class _PopularBannerWidgetState extends State<PopularBannerWidget> {
                     width: width,
                   );
                 },
-                placeholder: (context, url) =>
-                const SizedBox.shrink(),
+                placeholder: (context, url) => const SizedBox.shrink(),
               ),
             ),
           );
@@ -100,9 +92,7 @@ class _PopularBannerWidgetState extends State<PopularBannerWidget> {
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(banner.length, (
-            int index,
-          ) {
+          children: List.generate(banner.length, (int index) {
             return GestureDetector(
               onTap: () {
                 _controller.jumpToPage(_currentIndex);

@@ -13,6 +13,7 @@ class HomeDailyPage extends StatefulWidget {
 class _HomeDailyPageState extends State<HomeDailyPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ChangeNotifierProvider(
       create: (_) => HomeDailyProvider()..getData(true),
       child: HomeDailyBodyWidget(),

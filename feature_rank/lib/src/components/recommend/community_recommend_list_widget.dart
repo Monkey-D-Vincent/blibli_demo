@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:common/common.dart';
 import 'package:feature_rank/src/pages/recommend/model/community_recommend_model.dart';
 import 'package:feature_rank/src/pages/recommend/provider/community_recommend_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:ui_components/ui_components.dart';
 
 class CommunityRecommendListWidget extends StatefulWidget {
   const CommunityRecommendListWidget({super.key});
@@ -56,7 +58,17 @@ class _CommunityRecommendListWidgetState
       color: Colors.white,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          if(item.playUrl != null && item.playUrl!.isNotEmpty) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => VideoDetailPage(url: item.playUrl ?? "", id: item.id ?? -1,),
+              ),
+            );
+          } else {
+            ToastUtil.showToast(context, "视频链接不合法");
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_player_adapter/lib_player_adapter.dart';
 
-import 'player_factory.dart';
+import '../main/player_factory.dart';
 
 class AppVideoPlayer extends StatefulWidget {
   final String url;

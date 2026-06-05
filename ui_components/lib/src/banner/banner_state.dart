@@ -45,9 +45,7 @@ class _BannerStateState extends State<BannerState> {
                     color: Colors.transparent,
                     clipBehavior: Clip.hardEdge,
                     child: InkWell(
-                      onTap: () {
-                        ToastUtil.showToast(context, "${index + 1}");
-                      },
+                      onTap: () {},
                       child: CachedNetworkImage(
                         imageUrl: _bannerStore.bannerData.images[index],
                         imageBuilder: (context, imageProvider) {

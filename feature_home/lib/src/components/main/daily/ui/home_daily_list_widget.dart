@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:common/common.dart';
 import 'package:feature_home/src/components/main/daily/model/daily_list_model.dart';
 import 'package:feature_home/src/components/main/daily/model/home_daily_model.dart';
 import 'package:feature_home/src/components/main/daily/provider/home_daily_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ui_components/ui_components.dart';
 
 class HomeDailyListWidget extends StatelessWidget {
   const HomeDailyListWidget({super.key});
@@ -48,7 +50,20 @@ class HomeDailyListWidget extends StatelessWidget {
               ),
               ...item.list.map((data) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (data.playUrl != null && data.playUrl!.isNotEmpty) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => VideoDetailPage(
+                            url: data.playUrl ?? "",
+                            id: data.id ?? -1,
+                          ),
+                        ),
+                      );
+                    } else {
+                      ToastUtil.showToast(context, "视频链接不合法");
+                    }
+                  },
                   child: Column(
                     children: [
                       Stack(children: _dailyLogo(context, data)),
