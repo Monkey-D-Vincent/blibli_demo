@@ -39,7 +39,7 @@ class _PopularBannerWidgetState extends State<PopularBannerWidget> {
 
   Widget _bannerWidget(BuildContext context, List<PurpleCover> banner) {
     final width = MediaQuery.of(context).size.width;
-
+    
     return Positioned(
       child: CarouselSlider(
         carouselController: _controller,
