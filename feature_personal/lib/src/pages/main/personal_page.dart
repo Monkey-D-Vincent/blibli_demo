@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class PersonalPage extends StatelessWidget {
@@ -61,9 +61,14 @@ class PersonalPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 5),
-              Text(
-                "这个人很懒，什么都没有留下",
-                style: TextStyle(color: const Color(0xff999999), fontSize: 10),
+              GestureDetector(
+                onTap: () {
+                  RouterService.go(context, RoutePath.login);
+                },
+                child: Text(
+                  "这个人很懒，什么都没有留下",
+                  style: TextStyle(color: const Color(0xff999999), fontSize: 10),
+                ),
               ),
               SizedBox(height: 50),
               Text(

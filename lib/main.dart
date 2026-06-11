@@ -1,4 +1,4 @@
-import 'package:blibli_demo/component/navigator_main.dart';
+import 'package:blibli_demo/router/manager/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_shared/lib_shared.dart';
 
@@ -12,15 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,  // 去掉右上角DEBUG调试标签
-      title: 'blibli_demo', // App的名称（后台任务管理器显示的名字
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'blibli_demo',
       theme: ThemeData(
         primarySwatch: Colors.pink,
         useMaterial3: true,
         brightness: Brightness.light,
       ),
-      home: const MainTabNavigator(),
+      routerConfig: appRouter,
     );
   }
 }

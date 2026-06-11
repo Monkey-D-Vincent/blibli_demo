@@ -21,6 +21,8 @@ dependencies:
     path: ../lib_network
   lib_video:
     path: ../lib_video
+  common:
+    path: ../common
 
 dev_dependencies:
   flutter_test:
