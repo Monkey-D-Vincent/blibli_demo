@@ -63,7 +63,11 @@ class PersonalPage extends ConsumerWidget {
               ),
               SizedBox(height: 10),
               Text(
-                state.userName,
+                state.userName.isEmpty
+                    ? SharedUtil.getUserName().isEmpty
+                          ? "Knox"
+                          : SharedUtil.getUserName()
+                    : state.userName,
                 style: TextStyle(
                   color: const Color(0xff333333),
                   fontWeight: FontWeight.w500,
