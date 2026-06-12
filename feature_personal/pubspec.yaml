@@ -16,6 +16,7 @@ dependencies:
   json_annotation: ^4.9.0
   cached_network_image: ^3.3.1
   easy_refresh: ^3.5.0
+  flutter_riverpod: ^3.0.0
 
   lib_network:
     path: ../lib_network

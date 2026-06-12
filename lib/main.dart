@@ -1,10 +1,19 @@
 import 'package:blibli_demo/router/manager/app_router.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lib_shared/lib_shared.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupShared();
-  runApp(const MyApp());
+  await SharedUtil.init();
+
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -12,8 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_riverpod: ^3.0.0
-
   common:
     path: ../common
 

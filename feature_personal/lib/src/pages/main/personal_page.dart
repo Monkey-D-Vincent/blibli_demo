@@ -1,16 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PersonalPage extends StatelessWidget {
+import '../provider/personal_provider.dart';
+
+class PersonalPage extends ConsumerWidget {
   const PersonalPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return _personalBodyWidget(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    return _personalBodyWidget(context, ref);
   }
 
-  Widget _personalBodyWidget(BuildContext context) {
+  Widget _personalBodyWidget(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
         Image.asset(
@@ -20,12 +23,14 @@ class PersonalPage extends StatelessWidget {
           "assets/images/image_bg.png",
           package: "feature_personal",
         ),
-        _personalContentWidget(context),
+        _personalContentWidget(context, ref),
       ],
     );
   }
 
-  Widget _personalContentWidget(BuildContext context) {
+  Widget _personalContentWidget(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(userInfoProvider);
+
     return SafeArea(
       left: false,
       right: false,
@@ -37,7 +42,12 @@ class PersonalPage extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.topRight,
-                child: IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                child: IconButton(
+                  onPressed: () {
+                    RouterService.push(context, RoutePath.personalInfo);
+                  },
+                  icon: Icon(Icons.edit),
+                ),
               ),
               CachedNetworkImage(
                 imageUrl:
@@ -53,7 +63,7 @@ class PersonalPage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "黎明前的第一束光",
+                state.userName,
                 style: TextStyle(
                   color: const Color(0xff333333),
                   fontWeight: FontWeight.w500,
@@ -67,7 +77,10 @@ class PersonalPage extends StatelessWidget {
                 },
                 child: Text(
                   "这个人很懒，什么都没有留下",
-                  style: TextStyle(color: const Color(0xff999999), fontSize: 10),
+                  style: TextStyle(
+                    color: const Color(0xff999999),
+                    fontSize: 10,
+                  ),
                 ),
               ),
               SizedBox(height: 50),
@@ -76,55 +89,55 @@ class PersonalPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff333333)
+                  color: const Color(0xff333333),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               Text(
                 "我的收藏",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff333333)
+                  color: const Color(0xff333333),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               Text(
                 "视频功能声明",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff333333)
+                  color: const Color(0xff333333),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               Text(
                 "用户协议",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff333333)
+                  color: const Color(0xff333333),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               Text(
                 "版权声明",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff333333)
+                  color: const Color(0xff333333),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               Text(
                 "关于作者",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff333333)
+                  color: const Color(0xff333333),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
             ],
           ),
         ),
